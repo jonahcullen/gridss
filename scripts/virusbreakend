@@ -208,7 +208,7 @@ print_failure() {
 write_status "Full log file is: $logfile"
 # Timing instrumentation
 timinglogfile=$workingdir/timing.$timestamp.$HOSTNAME.$$.log
-if which /usr/bin/time >/dev/null ; then
+if /usr/bin/which /usr/bin/time >/dev/null ; then
 	timecmd="/usr/bin/time"
 	write_status "Found /usr/bin/time"
 else
@@ -339,14 +339,14 @@ if [[ $force != "true" ]] ; then
 fi
 # Validate required dependencies exist on PATH
 for tool in kraken2 gridss gridss_annotate_vcf_kraken2 gridss_annotate_vcf_repeatmasker samtools bcftools java bwa Rscript RepeatMasker ; do
-	if ! which $tool >/dev/null; then
+	if ! /usr/bin/which $tool >/dev/null; then
 		write_status "Error: unable to find $tool on \$PATH"
 		exit $EX_CONFIG
 	fi
-	write_status "Found $(which $tool)"
+	write_status "Found $(/usr/bin/which $tool)"
 done
-if which gridsstools > /dev/null ; then
-	write_status "Found $(which gridsstools)"
+if /usr/bin/which gridsstools > /dev/null ; then
+	write_status "Found $(/usr/bin/which gridsstools)"
 	if gridsstools --version > /dev/null ; then
 		write_status "gridsstools version: $(gridsstools --version)"
 	else
@@ -383,7 +383,7 @@ write_status "R version: $(Rscript --version 2>&1)"
 write_status "bwa $(bwa 2>&1 | grep Version || echo -n)"
 write_status "$(kraken2 --version | head -1)"
 #write_status "minimap2 $(minimap2 --version)"
-if which /usr/bin/time >/dev/null ; then
+if /usr/bin/which /usr/bin/time >/dev/null ; then
 	write_status "time version: $(/usr/bin/time --version 2>&1)"
 fi
 write_status "bash version: $(/bin/bash --version 2>&1 | head -1)"

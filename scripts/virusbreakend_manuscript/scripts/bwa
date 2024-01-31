@@ -1,11 +1,11 @@
 #!/bin/bash
 # Caches bwa indexes so VERSE doesn't run so slowly
 cache_dir=~/projects/virusbreakend/bwa_cache
-if [[ $(which -a bwa | wc -l ) -le 1 ]] ; then
+if [[ $(/usr/bin/which -a bwa | wc -l ) -le 1 ]] ; then
 	echo "Can't find real bwa \"$@\"" 1>&2
 	exit 1
 else
-	bwa=$(which -a bwa |tail -1)
+	bwa=$(/usr/bin/which -a bwa |tail -1)
 	echo "$bwa $@" 1>&2
 fi
 mkdir -p $cache_dir

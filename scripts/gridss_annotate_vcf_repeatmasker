@@ -130,11 +130,11 @@ if [[ "$output" == "" ]] ; then
 fi
 # Validate tools exist on path
 for tool in $rm java ; do
-	if ! which $tool >/dev/null; then
+	if ! /usr/bin/which $tool >/dev/null; then
 		write_status "Error: unable to find $tool on \$PATH"
 		exit $EX_CONFIG
 	fi
-	write_status "Found $(which $tool)"
+	write_status "Found $(/usr/bin/which $tool)"
 done
 write_status "RepeatMasker version: $($rm -v)"
 write_status "bash version: $(/bin/bash --version 2>&1 | head -1)"

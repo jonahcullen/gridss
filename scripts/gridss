@@ -314,7 +314,7 @@ The underlying error message can be found in $logfile
 *****"' EXIT
 # Timing instrumentation
 timinglogfile=$workingdir/gridss.timing.$timestamp.$HOSTNAME.$$.log
-if which /usr/bin/time >/dev/null ; then
+if /usr/bin/which /usr/bin/time >/dev/null ; then
 	timecmd="/usr/bin/time"
 	write_status "Found /usr/bin/time"
 else
@@ -511,11 +511,11 @@ done
 
 # Validate tools exist on path
 for tool in Rscript samtools java bwa ; do #minimap2
-	if ! which $tool >/dev/null; then
+	if ! /usr/bin/which $tool >/dev/null; then
 		write_status "Error: unable to find $tool on \$PATH"
 		exit $EX_CONFIG
 	fi
-	write_status "Found $(which $tool)"
+	write_status "Found $(/usr/bin/which $tool)"
 done
 if $(samtools --version-only >/dev/null) ; then
 	write_status "samtools version: $(samtools --version-only 2>&1)"
@@ -538,7 +538,7 @@ write_status "R version: $(Rscript --version 2>&1)"
 write_status "bwa $(bwa 2>&1 | grep Version || echo -n)"
 #write_status "minimap2 $(minimap2 --version)"
 if [[ "$timecmd" != "" ]] ; then
-	if which /usr/bin/time >/dev/null ; then
+	if /usr/bin/which /usr/bin/time >/dev/null ; then
 		write_status "time version: $(/usr/bin/time --version 2>&1)"
 	fi
 fi

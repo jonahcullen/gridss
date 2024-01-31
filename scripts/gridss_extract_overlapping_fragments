@@ -200,11 +200,11 @@ if [[ "$threads" -lt 1 ]] ; then
 fi
 write_status "Using $threads worker threads."
 for tool in gridsstools samtools ; do
-	if ! which $tool >/dev/null; then
+	if ! /usr/bin/which $tool >/dev/null; then
 		write_status "Error: unable to find $tool on \$PATH"
 		exit $EX_CONFIG
 	fi
-	write_status "Found $(which $tool)"
+	write_status "Found $(/usr/bin/which $tool)"
 done
 samtools_version=$(samtools --version | grep samtools | cut -b 10-)
 write_status "samtools version: $samtools_version"
@@ -246,7 +246,7 @@ target_file=$working_prefix.target.bed
 script_vcf_to_bed=$working_prefix.vcf2bed.R
 rm -f $working_prefix*
 if [[ "$targetbed" == "" ]] ; then
-	if which Rscript > /dev/null ; then
+	if /usr/bin/which Rscript > /dev/null ; then
 		write_status "Converting SV VCF to BED of breakpoint positions."
 	else 
 		write_status "Unable to convert SV VCF to BED. Rscript is not on PATH. "

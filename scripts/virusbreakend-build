@@ -78,11 +78,11 @@ write_status() {
 	echo "$(date): $1" 1>&2
 }
 for tool in kraken2-build samtools gunzip tar dustmasker rsync java wget ; do
-	if ! which $tool >/dev/null; then
+	if ! /usr/bin/which $tool >/dev/null; then
 		echo "Error: unable to find $tool on \$PATH" 1>&2
 		exit $EX_CONFIG
 	fi
-	write_status "Found $(which $tool)"
+	write_status "Found $(/usr/bin/which $tool)"
 done
 ### Find the jars
 find_jar() {
